@@ -1,10 +1,12 @@
+package com.example.composetaskappandroid.data
+
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "tasks")
 data class Task(
-    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val title: String,
     val description: String,
-    val isCompleted: Boolean = false
+    val isCompleted: Boolean = false // Adicione esta propriedade
 )

@@ -4,6 +4,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import com.example.composetaskappandroid.data.Task
 import com.example.composetaskappandroid.ui.TaskDialog
 import com.example.composetaskappandroid.ui.theme.TaskItem
 
@@ -29,9 +30,7 @@ fun TaskListScreen(viewModel: TaskViewModel) {
                     task = task,
                     onEdit = { taskToEdit = it; showDialog = true },
                     onDelete = { viewModel.deleteTask(it) },
-                    onToggleComplete = {
-                        viewModel.updateTask(task.copy(isCompleted = !task.isCompleted))
-                    }
+                    onToggleComplete = { viewModel.toggleTaskCompletion(task) } // Chama a função de alternar
                 )
             }
         }

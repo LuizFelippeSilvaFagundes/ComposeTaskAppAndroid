@@ -1,11 +1,11 @@
 package com.example.composetaskappandroid.ui.theme
 
-import Task
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.example.composetaskappandroid.data.Task
 
 @Composable
 fun TaskItem(
@@ -23,10 +23,10 @@ fun TaskItem(
             checked = task.isCompleted,
             onCheckedChange = { onToggleComplete() }
         )
-        Text(
-            text = task.title,
-            modifier = Modifier.weight(1f)
-        )
+        Column(modifier = Modifier.weight(1f)) {
+            Text(text = task.title) // Título da tarefa
+            Text(text = task.description) // Adicione a descrição da tarefa aqui
+        }
         Button(onClick = { onEdit(task) }) { Text("Edit") }
         Button(onClick = { onDelete(task) }) { Text("Delete") }
     }

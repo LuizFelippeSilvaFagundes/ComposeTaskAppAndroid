@@ -1,9 +1,7 @@
 package com.example.composetaskappandroid
 
-import AppDatabase
 import AuthViewModel
 import RegisterScreen
-import TaskDao
 import TaskListScreen
 import TaskViewModel
 import android.os.Bundle
@@ -16,22 +14,26 @@ import androidx.room.Room
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.composetaskappandroid.data.AppDatabase
+import com.example.composetaskappandroid.data.TaskDao
 import com.example.composetaskappandroid.ui.LoginScreen
 import com.example.composetaskappandroid.ui.theme.ComposeTaskAppAndroidTheme
 
 class MainActivity : ComponentActivity() {
+    private lateinit var taskDao: TaskDao
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Inicializa o banco de dados Room
+        // Inicializar o banco de dados Room
         val db = Room.databaseBuilder(
             applicationContext,
             AppDatabase::class.java,
             "task-database"
-        ).build()
+        ).fallbackToDestructiveMigration().build()
 
-        // Inicializa o DAO e o ViewModel de tarefas
-        val taskDao = db.taskDao()
+        // Obtenha o DAO
+        taskDao = db.taskDao()
 
         setContent {
             ComposeTaskAppAndroidTheme {
@@ -40,6 +42,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
 
 @Composable
 fun AppNavigator(taskDao: TaskDao) {
