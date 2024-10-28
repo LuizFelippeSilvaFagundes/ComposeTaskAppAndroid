@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "299893719443",
+    "project_id": "composetaskappandroid",
+    "storage_bucket": "composetaskappandroid.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:299893719443:android:886a54ee7777c4e5136866",
+        "android_client_info": {
+          "package_name": "com.example.composetaskappandroid"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8zkuEPcpcKv6yO0R_uzQWO55aLd8PRBk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
