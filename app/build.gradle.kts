@@ -100,6 +100,7 @@ dependencies {
     implementation("androidx.room:room-ktx:2.5.0")
 
     implementation("joda-time:joda-time:2.10.10")
+    implementation("androidx.compose.material:material-icons-extended:1.5.1") // Adicione esta linha
 
 
 }

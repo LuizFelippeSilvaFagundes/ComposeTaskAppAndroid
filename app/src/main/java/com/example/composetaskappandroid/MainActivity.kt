@@ -2,7 +2,6 @@ package com.example.composetaskappandroid
 
 import AuthViewModel
 import RegisterScreen
-import TaskListScreen
 import TaskViewModel
 import android.os.Build
 import android.os.Bundle
@@ -19,6 +18,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.composetaskappandroid.data.AppDatabase
 import com.example.composetaskappandroid.data.TaskDao
 import com.example.composetaskappandroid.ui.LoginScreen
+import com.example.composetaskappandroid.ui.TaskListScreen
 import com.example.composetaskappandroid.ui.theme.ComposeTaskAppAndroidTheme
 
 class MainActivity : ComponentActivity() {
