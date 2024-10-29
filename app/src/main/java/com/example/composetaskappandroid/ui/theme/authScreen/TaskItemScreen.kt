@@ -25,7 +25,7 @@ fun TaskItem(
         )
         Column(modifier = Modifier.weight(1f)) {
             Text(text = task.title) // Título da tarefa
-            Text(text = task.description) // Adicione a descrição da tarefa aqui
+            Text(text = task.description ?: "Sem descrição") // Adiciona a descrição da tarefa
         }
         Button(onClick = { onEdit(task) }) { Text("Edit") }
         Button(onClick = { onDelete(task) }) { Text("Delete") }

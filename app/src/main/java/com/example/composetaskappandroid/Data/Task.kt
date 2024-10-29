@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 data class Task(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val title: String,
-    val description: String,
-    val isCompleted: Boolean = false // Adicione esta propriedade
+    val description: String?, // Pode ser nulo
+    val dueDate: Long? = null, // Armazenar como milissegundos
+    val isCompleted: Boolean = false
 )

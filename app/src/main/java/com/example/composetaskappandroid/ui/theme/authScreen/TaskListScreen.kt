@@ -44,7 +44,7 @@ fun TaskListScreen(viewModel: TaskViewModel) {
                 if (taskToEdit != null) {
                     viewModel.updateTask(it)
                 } else {
-                    viewModel.addTask(it)
+                    viewModel.addTask(it) // Aqui, a dueDate está sendo passada
                 }
                 showDialog = false
                 taskToEdit = null

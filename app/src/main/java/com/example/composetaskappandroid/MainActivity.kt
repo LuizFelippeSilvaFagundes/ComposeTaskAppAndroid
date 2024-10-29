@@ -4,9 +4,11 @@ import AuthViewModel
 import RegisterScreen
 import TaskListScreen
 import TaskViewModel
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -22,6 +24,7 @@ import com.example.composetaskappandroid.ui.theme.ComposeTaskAppAndroidTheme
 class MainActivity : ComponentActivity() {
     private lateinit var taskDao: TaskDao
 
+    @RequiresApi(Build.VERSION_CODES.O) // Apenas se você estiver usando Java Time
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -30,7 +33,10 @@ class MainActivity : ComponentActivity() {
             applicationContext,
             AppDatabase::class.java,
             "task-database"
-        ).fallbackToDestructiveMigration().build()
+        )
+            .addMigrations(AppDatabase.MIGRATION_2_3) // Adicione a migração aqui
+            .fallbackToDestructiveMigration() // Remove dados se a migração falhar
+            .build()
 
         // Obtenha o DAO
         taskDao = db.taskDao()
@@ -43,7 +49,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-
+@RequiresApi(Build.VERSION_CODES.O) // Apenas se você estiver usando Java Time
 @Composable
 fun AppNavigator(taskDao: TaskDao) {
     val navController = rememberNavController()

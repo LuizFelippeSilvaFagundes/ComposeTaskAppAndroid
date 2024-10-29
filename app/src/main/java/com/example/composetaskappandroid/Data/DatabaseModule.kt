@@ -12,7 +12,6 @@ class DatabaseModule {
             AppDatabase::class.java,
             "app_database"
         )
-            .addMigrations(AppDatabase.MIGRATION_1_2) // Adicione a migração aqui
             .build()
     }
 }

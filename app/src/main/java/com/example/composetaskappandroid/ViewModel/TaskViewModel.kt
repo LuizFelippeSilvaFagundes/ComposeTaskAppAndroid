@@ -17,6 +17,7 @@ class TaskViewModel(private val taskDao: TaskDao) : ViewModel() {
         viewModelScope.launch {
             tasks.clear()
             tasks.addAll(taskDao.getAllTasks())
+            checkForOverdueTasks() // Verifique se as tarefas estão vencidas após carregá-las
         }
     }
 
@@ -36,21 +37,29 @@ class TaskViewModel(private val taskDao: TaskDao) : ViewModel() {
 
     fun deleteTask(task: Task) {
         viewModelScope.launch {
-            taskDao.deleteTask(task.id) // Assumindo que `id` é do tipo Long
+            taskDao.deleteTask(task.id)
             loadTasks()
         }
     }
 
-
     fun toggleTaskCompletion(task: Task) {
         viewModelScope.launch {
-            // Altera o status da tarefa
-            val updatedTask = task.copy(isCompleted = !task.isCompleted) // Inverte o status
-            taskDao.updateTask(updatedTask) // Atualiza a tarefa no banco
-            loadTasks() // Recarrega a lista de tarefas
+            val updatedTask = task.copy(isCompleted = !task.isCompleted)
+            taskDao.updateTask(updatedTask)
+            loadTasks()
         }
     }
 
-
-
+    private fun checkForOverdueTasks() {
+        viewModelScope.launch {
+            val currentTime = System.currentTimeMillis() // Tempo atual em milissegundos
+            tasks.forEach { task ->
+                if (task.dueDate != null && !task.isCompleted && task.dueDate < currentTime) {
+                    // Se a tarefa está vencida, marque como concluída ou faça o que for necessário
+                    toggleTaskCompletion(task) // Você pode optar por marcar como concluída
+                    println("A tarefa '${task.title}' está vencida!") // Para fins de depuração, imprima uma mensagem
+                }
+            }
+        }
+    }
 }
