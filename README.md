@@ -7,7 +7,7 @@
 
 ![home](/home.png)
 
-![login](/login.png)
+![login](/Login.png)
 ## Introdução
 
 Este projeto foi desenvolvido como parte do processo seletivo para o cargo de Jr. Developer na Quality Automação Ltda. A aplicação permite aos usuários criar, visualizar e gerenciar uma lista de tarefas, além de fornecer funcionalidades de cadastro e autenticação.
