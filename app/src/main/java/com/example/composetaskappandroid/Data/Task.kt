@@ -9,5 +9,6 @@ data class Task(
     val title: String,
     val description: String?, // Pode ser nulo
     val dueDate: Long? = null, // Armazenar como milissegundos
-    val isCompleted: Boolean = false
+    val isCompleted: Boolean = false,
+
 )

@@ -26,7 +26,6 @@ fun TaskDialog(
     var showDatePicker by remember { mutableStateOf(false) }
     var showTimePicker by remember { mutableStateOf(false) }
 
-    // DatePicker
     if (showDatePicker) {
         val calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
@@ -41,7 +40,7 @@ fun TaskDialog(
                     set(Calendar.MONTH, selectedMonth)
                     set(Calendar.DAY_OF_MONTH, selectedDay)
                 }
-                dueDateMillis = selectedDate.timeInMillis // Atualiza a data
+                dueDateMillis = selectedDate.timeInMillis
                 showDatePicker = false
             },
             year,
@@ -50,7 +49,6 @@ fun TaskDialog(
         ).show()
     }
 
-    // TimePicker
     if (showTimePicker) {
         val calendar = Calendar.getInstance()
         val hour = calendar.get(Calendar.HOUR_OF_DAY)
@@ -64,7 +62,7 @@ fun TaskDialog(
                     set(Calendar.HOUR_OF_DAY, selectedHour)
                     set(Calendar.MINUTE, selectedMinute)
                 }
-                dueDateMillis = selectedTime.timeInMillis // Atualiza a data e hora
+                dueDateMillis = selectedTime.timeInMillis
                 showTimePicker = false
             },
             hour,
@@ -114,6 +112,7 @@ fun TaskDialog(
                 Button(onClick = { showTimePicker = true }) {
                     Text("Select Time")
                 }
+                Spacer(modifier = Modifier.height(8.dp))
             }
         }
     )

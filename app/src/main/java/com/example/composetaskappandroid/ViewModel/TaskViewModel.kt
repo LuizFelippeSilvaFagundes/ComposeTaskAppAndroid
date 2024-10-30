@@ -1,18 +1,25 @@
+import android.content.Context
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.composetaskappandroid.Retrofit.RetrofitInstance
 import com.example.composetaskappandroid.data.Task
 import com.example.composetaskappandroid.data.TaskDao
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class TaskViewModel(private val taskDao: TaskDao) : ViewModel() {
-
+class TaskViewModel(private val taskDao: TaskDao, context: Context) : ViewModel() {
     val tasks = mutableStateListOf<Task>()
+
+    // Variáveis para armazenar informações do conselho
+    var advice = mutableStateOf("") // Usando mutableStateOf para reatividade
 
     init {
         loadTasks()
+        fetchAdvice() // Chama a função para buscar conselho ao iniciar
     }
-
     private fun loadTasks() {
         viewModelScope.launch {
             tasks.clear()
@@ -55,10 +62,25 @@ class TaskViewModel(private val taskDao: TaskDao) : ViewModel() {
             val currentTime = System.currentTimeMillis() // Tempo atual em milissegundos
             tasks.forEach { task ->
                 if (task.dueDate != null && !task.isCompleted && task.dueDate < currentTime) {
-                    // Se a tarefa está vencida, marque como concluída ou faça o que for necessário
-                    toggleTaskCompletion(task) // Você pode optar por marcar como concluída
-                    println("A tarefa '${task.title}' está vencida!") // Para fins de depuração, imprima uma mensagem
+                    toggleTaskCompletion(task) // Marque como concluída
+                    println("A tarefa '${task.title}' está vencida!") // Para fins de depuração
                 }
+            }
+        }
+    }
+
+    // Função para buscar conselho
+    fun fetchAdvice() {
+        viewModelScope.launch {
+            try {
+                val response = withContext(Dispatchers.IO) {
+                    RetrofitInstance.api.getAdvice() // Chama a API de conselhos
+                }
+                advice.value = response.slip.advice // Armazena o conselho obtido
+
+            } catch (e: Exception) {
+                advice.value = "Erro ao obter conselho" // Lida com qualquer erro que possa ocorrer
+                println("Erro ao buscar conselho: ${e.message}") // Para fins de depuração
             }
         }
     }

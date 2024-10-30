@@ -12,7 +12,8 @@ fun TaskItem(
     task: Task,
     onEdit: (Task) -> Unit,
     onDelete: (Task) -> Unit,
-    onToggleComplete: () -> Unit
+    onToggleComplete: () -> Unit,
+    showRepeatInfo: @Composable (() -> Unit)? = null // Parâmetro opcional para mostrar info de repetição
 ) {
     Row(
         modifier = Modifier
@@ -26,6 +27,7 @@ fun TaskItem(
         Column(modifier = Modifier.weight(1f)) {
             Text(text = task.title) // Título da tarefa
             Text(text = task.description ?: "Sem descrição") // Adiciona a descrição da tarefa
+            showRepeatInfo?.invoke() // Chama a função para exibir o intervalo de repetição, se fornecida
         }
         Button(onClick = { onEdit(task) }) { Text("Edit") }
         Button(onClick = { onDelete(task) }) { Text("Delete") }

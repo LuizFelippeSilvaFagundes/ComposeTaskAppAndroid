@@ -3,6 +3,9 @@ package com.example.composetaskappandroid
 import AuthViewModel
 import RegisterScreen
 import TaskViewModel
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -10,6 +13,7 @@ import androidx.activity.compose.setContent
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.room.Room
 import androidx.navigation.compose.NavHost
@@ -42,8 +46,9 @@ class MainActivity : ComponentActivity() {
         taskDao = db.taskDao()
 
         setContent {
+
             ComposeTaskAppAndroidTheme {
-                AppNavigator(taskDao)
+                AppNavigator(taskDao, this)
             }
         }
     }
@@ -51,10 +56,10 @@ class MainActivity : ComponentActivity() {
 
 @RequiresApi(Build.VERSION_CODES.O) // Apenas se você estiver usando Java Time
 @Composable
-fun AppNavigator(taskDao: TaskDao) {
+fun AppNavigator(taskDao: TaskDao, context: Context) {
     val navController = rememberNavController()
     val authViewModel: AuthViewModel = viewModel()
-    val taskViewModel = remember { TaskViewModel(taskDao) }
+    val taskViewModel = remember { TaskViewModel(taskDao, context) } // Passando o contexto
 
     NavHost(navController = navController, startDestination = "login") {
         composable("login") {
@@ -82,7 +87,10 @@ fun AppNavigator(taskDao: TaskDao) {
             )
         }
         composable("task_list") {
-            TaskListScreen(viewModel = taskViewModel)
+            TaskListScreen(viewModel = taskViewModel) // Passa o ViewModel com a nova implementação
         }
     }
 }
+
+
+

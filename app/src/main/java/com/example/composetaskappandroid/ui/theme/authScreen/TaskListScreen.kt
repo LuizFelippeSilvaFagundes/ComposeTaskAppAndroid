@@ -11,12 +11,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.composetaskappandroid.data.Task
-import com.example.composetaskappandroid.ui.TaskDialog
 import com.example.composetaskappandroid.ui.theme.TaskItem
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.ArrowDropUp
-
 @Composable
 fun TaskListScreen(viewModel: TaskViewModel) {
     var showDialog by remember { mutableStateOf(false) }
@@ -36,6 +34,7 @@ fun TaskListScreen(viewModel: TaskViewModel) {
         Column(modifier = Modifier
             .fillMaxSize()
             .padding(padding)) {
+
             // Seção de tarefas pendentes
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -89,6 +88,9 @@ fun TaskListScreen(viewModel: TaskViewModel) {
                     }
                 }
             }
+
+            // Exibindo o conselho
+            Text(text = "Conselho: ${viewModel.advice.value}", style = MaterialTheme.typography.titleMedium)
         }
     }
 

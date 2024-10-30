@@ -100,7 +100,11 @@ dependencies {
     implementation("androidx.room:room-ktx:2.5.0")
 
     implementation("joda-time:joda-time:2.10.10")
-    implementation("androidx.compose.material:material-icons-extended:1.5.1") // Adicione esta linha
+    implementation("androidx.compose.material:material-icons-extended:1.5.1")
+    // dependencias da api
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+
 
 
 }
