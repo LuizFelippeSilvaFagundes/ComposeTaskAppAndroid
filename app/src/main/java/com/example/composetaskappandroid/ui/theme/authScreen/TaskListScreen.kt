@@ -26,6 +26,7 @@ fun TaskListScreen(viewModel: TaskViewModel) {
 
     Scaffold(
         floatingActionButton = {
+
             FloatingActionButton(onClick = { showDialog = true }) {
                 Text("+")
             }
