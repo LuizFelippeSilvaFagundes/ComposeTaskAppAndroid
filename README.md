@@ -1,7 +1,12 @@
 # Aplicação Mobile de Gerenciamento de Tarefas
-![Adicionando Tarefa](/Adicionando a tarefa.png)
+![Adicionando Tarefa](/Adicionando_a_tarefa.png)
+
+
+
 ![data da tarefa](/data_tarefa.png)
+
 ![home](/home.png)
+
 ![login](/login.png)
 ## Introdução
 
