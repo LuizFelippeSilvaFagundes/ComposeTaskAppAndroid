@@ -93,12 +93,10 @@ dependencies {
     // Navegação
     implementation("androidx.navigation:navigation-compose:2.6.0")
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.1") // Para integração com ViewModel
-
     // Dependências do Room
     implementation("androidx.room:room-runtime:2.5.0")
     ksp("androidx.room:room-compiler:2.5.0")
     implementation("androidx.room:room-ktx:2.5.0")
-
     implementation("joda-time:joda-time:2.10.10")
     implementation("androidx.compose.material:material-icons-extended:1.5.1")
     // dependencias da api
